@@ -17,11 +17,11 @@
     <section class="content">
         <div class= "form-group">
             <h3>Add new member</h3>
-            <div class = "form-body">         
+            <div class = "form-body">
                 <div class="information-box">
                     <div class="information">
-                        <input type="text" name="name" id="name" placeholder="Name">
-                        <input type="email" name="email" id="email" placeholder="Email">
+                        <input type="text" name="name" id="name" placeholder="Name" >
+                        <input type="email" name="email" id="email" placeholder="Email" >
                         <select name="major" id="major" >
                             <option value="" selected disabled>major</option>
                             <option>Computer Science</option>
@@ -29,19 +29,19 @@
                             <option>Information Technology</option>
                             <option>Information System</option>      
                         </select>
-                        <select name="role" id="role">
+                        <select name="role" id="role" >
+                                <option value="" selected disabled>role</option>
                                 <option>Front-End Developer</option>
                                 <option>Back-End Developer</option>
                                 <option>Full-Stack Developer</option>
                                 <option>UI/UX Designer</option>     
                         </select>
-                        <textarea minlength="500" placeholder="Biography" id = "biography"></textarea>   
+                        <textarea minlength="500" maxlength="1500" placeholder="Biography" id = "biography" ></textarea>   
                     </div>
-                    
                     <div class="index-selection">
                         <input type="checkbox" name="bottom" id="add-to-bottom">
                         <label>Add to bottom</label>
-                        <span>&sol;</span>
+                        <span>&nbsp; &sol; &nbsp;</span>
                         <label>or at index</label>
                         <input type="number" name="index" min="0" id="add-to-index">
                     </div>
@@ -51,35 +51,34 @@
                  
             </div>
         </div>
+        
         <div class="members">
             <div class="members-header">
                 <div class="filter-bar">
-                    <div action="">
-                        <span>SORT BY</span>
-                        <select name="letter-sort" id="letter-sort">
-                            <option>A-Z</option>
-                            <option>Z-A</option>    
-                            <option>Newest</option>    
-                            <option>Oldest</option>    
-                        </select>
-                        <vr></vr>
-                        <select name="major" id="major-query">
-                            <option value="" selected>major</option>
-                            <option>Computer Science</option>
-                            <option>Computer Engineering</option>
-                            <option>Information Technology</option>
-                            <option>Information System</option>      
-                        </select>
-                        <select name="role" id="role-query">
-                            <option value="" selected>role</option>
-                            <option>Front-End Developer</option>
-                            <option>Back-End Developer</option>
-                            <option>Full-Stack Developer</option>
-                            <option>UI/UX Designer</option>     
-                        </select>
-                        <vr></vr>
-                        <input id="name-query" type="text" placeholder="Search by name..." >   
-                    </div>
+                    <span>SORT BY</span>
+                    <select name="letter-sort" id="letter-sort">
+                        <option>A-Z</option>
+                        <option>Z-A</option>    
+                        <option>Newest</option>    
+                        <option>Oldest</option>    
+                    </select>
+                    <vr></vr>
+                    <select name="major" id="major-query">
+                        <option value="" selected>major</option>
+                        <option>Computer Science</option>
+                        <option>Computer Engineering</option>
+                        <option>Information Technology</option>
+                        <option>Information System</option>      
+                    </select>
+                    <select name="role" id="role-query">
+                        <option value="" selected>role</option>
+                        <option>Front-End Developer</option>
+                        <option>Back-End Developer</option>
+                        <option>Full-Stack Developer</option>
+                        <option>UI/UX Designer</option>     
+                    </select>
+                    <vr></vr>
+                    <input id="name-query" type="text" placeholder="Search by name..." >    
                 </div>
                 <div class="items-count">
                    <p id = "items-count"> 10 items</p>
@@ -90,23 +89,25 @@
             </div>
         </div>
     </section>
-    <div id = "record" class="blackbox" style="display:none">
+
+    <div id = "record" class="popup" style="display:none">
         <div class="details-box">
             <button class="cancel" onclick="HideRecord()">X</button>
-            <div class="member-information-box">
+            <div class="popup-information-box">
                 <div class="member-details">
                     <input id = "record-name" value="Mohamemd Natsha">
                     <div class="contacts">
                         <div>
-                            <input id = "record-email" value=""><p> / </p>
-                            <select name="" id="record-major">
+                            <input id = "record-email" type="email" value="" >
+                            <span> / </span>
+                            <select name="" id="record-major" >
                                 <option>Computer Science</option>
                                 <option>Computer Engineering</option>
                                 <option>Information Technology</option>
                                 <option>Information System</option>   
                             </select>
-                            <p>/</p>
-                            <select name="" id="record-role">
+                            <span>/</span>
+                            <select name="" id="record-role" >
                                 <option>Front-End Developer</option>
                                 <option>Back-End Developer</option>
                                 <option>Full-Stack Developer</option>
@@ -114,7 +115,7 @@
                             </select>
                         </div>
                     </div>
-                    <textarea id ="record-biography" minlength="500"> record paragraph is here</textarea>
+                    <textarea id ="record-biography" minlength="500" maxlength="1500"> record paragraph is here</textarea>
                 </div>
                 <div class= "member-options">
                     <button id = "deleteMember">DELETE</button>

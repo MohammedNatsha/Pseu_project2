@@ -15,11 +15,12 @@ class Member
     render()
     {
         return `
-        <button class="member-card" data-key = "${this.email}" onclick="ShowRecord(this)">
-            <div class="member-icon">
-                <div class="member-picture"><span>-</span></div>
-            </div>
-            <div class="member-information">
+        <div class="member-card" >
+            <button class="delete-button" data-key = "${this.email}" onclick="UpdateBoxEmail(this);deleteMember()" >
+                <span>-</span>
+            </button>
+            
+            <div data-key = "${this.email}"  onclick="ShowRecord(this)">
                 <h3>${this.name}</h3>
                 <h5>
                     ${this.email} / ${this.major} / ${this.role}
@@ -28,7 +29,7 @@ class Member
                     ${this.biography}
                 </p>
             </div>
-        </button>
+        </div>
         `   
     }
 }
@@ -200,14 +201,20 @@ AddMember = () =>
   
     let indx = GetTargetedIndex(pseu);
     
-    pseu.AddMember(indx,member);
-    UpdateUI();
+    pseu.AddMember(indx,member)
     
+    UpdateUI();
     ClearForm();
+    
+    
     return false;
     
 }
 
+let UpdateBoxEmail = (button) =>
+{
+    boxEmail = button.attributes["data-key"].nodeValue;
+}
 let deleteMember = () =>
 {
     pseu.RemoveMember(boxEmail);

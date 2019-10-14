@@ -23,20 +23,19 @@ header {
   width: 100%;
   height: 74px;
   background-color: #2D89E6;
-  color: white;
+  color: #F6F6F6;
   font-size: 12px;
-  margin: 0px;
 }
 
 .content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   width: 100%;
   height: calc(100% - 74px);
 }
@@ -51,68 +50,73 @@ header {
           flex-direction: column;
   width: calc(300px + 10vw);
   height: 90%;
-  min-height: 600px;
   border: solid 1px #C3C3C3;
   border-radius: 34px;
-  margin: 35px;
-  padding-top: 10px;
+  margin: 30px;
+  padding-top: 2px;
 }
 
 .form-group h3 {
   color: #707070;
   width: 100%;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .form-group .form-body {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   height: 100%;
 }
 
 .form-group .form-body .information-box {
-  height: 100%;
-  min-height: 450px;
+  height: 94%;
   padding: calc(2px + 0.5vw) 30px;
-}
-
-.form-group .form-body .information-box .information input, .form-group .form-body .information-box select, .form-group .form-body .information-box textarea {
-  margin: 10px 0px;
-  border: solid 1px #C3C3C3;
-  border-radius: 8px;
-  padding: 10px;
-  width: 100%;
-  height: calc(10px + 3.5vh);
-  min-height: 40px;
-  color: #AEAEAE;
 }
 
 .form-group .form-body .information-box .information {
   height: 90%;
-  margin-bottom: 10px;
 }
 
-.form-group .form-body .information-box textarea {
-  resize: none;
-  height: 40%;
-  min-height: 100px;
-}
-
-.form-group button {
+.form-group .form-body .information-box .information input, .form-group .form-body .information-box .information select, .form-group .form-body .information-box .information textarea {
+  margin: 5px 0px;
+  border: solid 1px #C3C3C3;
+  border-radius: 8px;
+  padding: 10px;
   width: 100%;
-  height: 50px;
+  height: calc(10px);
+  min-height: 40px;
+  color: #AEAEAE;
+}
+
+.form-group .form-body .information-box .information textarea {
+  height: 40%;
+}
+
+.form-group .form-body .information-box .index-selection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-group .form-body .information-box .index-selection label {
+  font-size: 1.75vh;
+}
+
+.form-group .form-body .information-box .index-selection input {
+  border: solid 1px #C3C3C3;
+}
+
+.form-group .form-body button {
+  width: 100%;
+  height: 7%;
   background: #2D89E6;
   border-radius: 0px 0px 34px 34px;
-  border-color: transparent;
-  color: white;
 }
 
 .members {
@@ -153,13 +157,6 @@ header {
   font-size: 12px;
 }
 
-.members .members-header .filter-bar div select, .members .members-header .filter-bar input {
-  margin: 5px;
-  border: none;
-  border-radius: 4px;
-  color: #C3C3C3;
-}
-
 .members .members-header .items-count {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -194,8 +191,6 @@ header {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background: none;
-  border: none;
   text-align: left;
   height: 125px;
 }
@@ -218,81 +213,39 @@ header {
   text-overflow: ellipsis;
 }
 
-.members-list .member-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 240px;
-}
-
-.members-list .member-icon .member-picture {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  color: white;
-  font-size: 40px;
-  font-weight: bolder;
-  width: 40px;
-  height: 40px;
+.members-list .member-card .delete-button {
+  margin: 20px;
+  padding: 20px;
+  width: 20px;
+  height: 20px;
   background-color: #FF4A4A;
   border-radius: 100%;
 }
 
-.members-list .member-icon .member-picture span {
-  margin-bottom: 3px;
+.members-list .member-card .delete-button span {
+  margin-bottom: 2px;
+  font-size: 40px;
+  font-weight: bolder;
 }
 
-.blackbox {
+.popup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: fixed;
-  background: rgba(0, 0, 0, 0.356);
   top: 0px;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  background: rgba(0, 0, 0, 0.356);
 }
 
-.blackbox .cancel {
-  border: transparent;
-  position: relative;
-  top: -15px;
-  left: -15px;
-  background: black;
-  width: 42px;
-  height: 42px;
-  color: white;
-  border-radius: 500px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.blackbox .details-box {
+.popup .details-box {
   background: white;
   width: 60%;
   height: 60%;
@@ -302,7 +255,17 @@ header {
   min-width: 200px;
 }
 
-.blackbox .member-information-box {
+.popup .details-box .cancel {
+  position: relative;
+  top: -15px;
+  left: -15px;
+  border-radius: 500px;
+  width: 42px;
+  height: 42px;
+  background: black;
+}
+
+.popup .details-box .popup-information-box {
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -316,27 +279,7 @@ header {
       justify-content: space-around;
 }
 
-.member-options {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.member-options button {
-  margin: 20px;
-  height: 45px;
-  width: 175px;
-  border: none;
-  color: white;
-}
-
-.member-details {
+.popup .details-box .popup-information-box .member-details {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -349,96 +292,83 @@ header {
           align-items: center;
   margin: 0px 50px;
   height: 90%;
-}
-
-.member-details #record-name {
-  text-align: center;
-  font-size: calc(20px + 2vw);
-  margin: 20px 0px;
-}
-
-.member-details p {
-  display: inline;
   color: #6A6A6A;
-  margin: 30px 0px;
-  text-align: center;
 }
 
-.member-details div
-div input, .member-details textarea, .member-details select {
+.popup .details-box .popup-information-box .member-details #record-name {
+  margin: 20px 0px;
+  text-align: center;
+  color: black;
+  font-size: calc(20px + 2vw);
+}
+
+.popup .details-box .popup-information-box .member-details div input, .popup .details-box .popup-information-box .member-details textarea, .popup .details-box .popup-information-box .member-details select {
+  width: auto;
+  text-align: center;
   color: #2D89E6;
   font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.member-details #record-biography {
-  overflow-y: auto;
-  margin: 20px;
+.popup .details-box .popup-information-box .member-details #record-biography {
+  margin: 20px 10px;
+  border: none;
+  padding: 10px;
   width: 100%;
   height: 90%;
-  resize: none;
-  border: none;
+  overflow-y: auto;
   text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
-.member-details input {
-  border: transparent;
-}
-
-.member-details input:focus {
+.popup .details-box .popup-information-box .member-details input:focus, .popup .details-box .popup-information-box .member-details #record-biography:focus {
   border: solid 1px #2D89E6;
   border-radius: 6px;
 }
 
-.member-details select {
+.popup .details-box .popup-information-box .member-details select {
   border: 1px solid #C3C3C3;
   border-radius: 5px;
 }
 
-vr {
-  border-left: 1px solid white;
-  margin: 0px 10px 0px 10px;
-}
-
-.member-options {
+.popup .details-box .member-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: 50px;
 }
 
-.member-options button:nth-child(1) {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+.popup .details-box .member-options button {
+  margin: 20px 3vw;
+  width: 20%;
+  height: 45px;
+  font-size: calc(9px + 0.5vw);
+}
+
+.popup .details-box .member-options button:nth-child(1) {
   background-color: #FF4A4A;
-  margin: 20px 3vw;
-  width: 20%;
-  font-size: calc(9px + 0.5vw);
 }
 
-.member-options button:nth-child(2) {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+.popup .details-box .member-options button:nth-child(2) {
   background-color: #2D89E6;
-  margin: 20px 3vw;
-  width: 20%;
-  font-size: calc(9px + 0.5vw);
 }
 
-.member-options button:nth-child(3) {
+.popup .details-box .member-options button:nth-child(3) {
+  background-color: #484848;
+}
+
+select, input {
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  color: #C3C3C3;
+}
+
+button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -448,13 +378,18 @@ vr {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #484848;
-  margin: 20px 3vw;
-  width: 20%;
-  font-size: calc(9px + 0.5vw);
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-.member-information {
-  width: 250%;
+textarea {
+  resize: none;
+}
+
+vr {
+  border-left: 1px solid white;
+  height: 20px;
+  margin: 0px 2px 0px 2px;
 }
 /*# sourceMappingURL=style.css.map */
