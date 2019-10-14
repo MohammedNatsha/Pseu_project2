@@ -1,5 +1,13 @@
-let boxEmail = null;
+// *** global variables ***
 
+// keep track of select Email
+let boxEmail = null;
+// default team
+let pseu;
+
+// *** Classes ***
+
+// Member is the class which presents a person
 class Member
 {
     constructor(name,email,major,role,biography,date)
@@ -12,6 +20,7 @@ class Member
         this.joinDate = date?date : Date.now();
     }
 
+    // creates UI for the Member Widget
     render()
     {
         return `
@@ -34,20 +43,18 @@ class Member
     }
 }
 
+// holds Teams Information and necessary functions
 class Team
 {
     constructor(name)
     {
         this.name = name;
         this.members = [];
+        // Load Data when object created
         this.LoadMembers();
     }
 
-    HasEmail(email)
-    {
-        return this.members.some((element) => {return element.email == email});
-    }
-
+    // Team Modification Functions
     GetMember(email)
     {
         return this.members.find(element => element.email == email);
@@ -70,6 +77,7 @@ class Team
     {
         let _targetedIndex = this.members.findIndex(element => element.email == targetedEmail);
 
+        // validate the new email after modification
         if(targetedEmail != email && this.members.findIndex(element => element.email == email) != -1)
         {
             window.alert("there is already a user with the same email");
@@ -83,6 +91,12 @@ class Team
         this.members[_targetedIndex].biography = biography;
 
         this.SaveMembers();
+    }
+
+    // Save and Load Team Information
+    SaveMembers()
+    {
+        localStorage.setItem("Team " + this.name,JSON.stringify(this.members));
     }
 
     LoadMembers()
@@ -99,11 +113,13 @@ class Team
         }
     }
 
-    SaveMembers()
+    // Email Validation
+    HasEmail(email)
     {
-        localStorage.setItem("Team " + this.name,JSON.stringify(this.members));
+        return this.members.some((element) => {return element.email == email});
     }
-    
+
+    // Filters 
     FilterMembers(major,role,search)
     {
         let filtered = this.members;
@@ -121,7 +137,7 @@ class Team
     }
 
     
-
+    // creates UI of the Team Widget
     render(list)
     {
         let listUI = "";
@@ -134,9 +150,11 @@ class Team
     }
 }
 
+// A sort function that depends on Sort Query
 let sorting = (query,array) =>
 {
     let _sortFunction;
+    // select the function to sort according to 
     if(query == "A-Z")
         _sortFunction = function(a, b){return b.name < a.name};
     else if(query == "Z-A")
@@ -155,28 +173,7 @@ let sorting = (query,array) =>
        
 }
 
-let pseu;
-
-ClearForm = () =>
-{
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("major").value = "";
-    document.getElementById("role").value = "";
-    document.getElementById("biography").value = "";
-}
-
-GetTargetedIndex = (team) =>
-{
-    if(document.getElementById("add-to-index").value)
-        return Math.min(document.getElementById("add-to-index").value,team.members.length-1);
-
-    if(document.getElementById("add-to-bottom").checked)
-        return team.members.length;
-
-    return 0;
-}
-
+// Adds Member to the Team
 AddMember = () =>
 {
     let name = document.getElementById("name").value;
@@ -185,6 +182,7 @@ AddMember = () =>
     let role = document.getElementById("role").value;
     let biography = document.getElementById("biography").value;
 
+    // Input validation
     if(!name || !email || !major || !role || !biography)
     {
         window.alert("Please fill all informations");
@@ -197,31 +195,45 @@ AddMember = () =>
         return false;
     }
 
+    // creates a member and adds it to the team
     let member = new Member(name,email,major,role,biography);
   
     let indx = GetTargetedIndex(pseu);
     
     pseu.AddMember(indx,member)
     
+    // Updates the UI
     UpdateUI();
     ClearForm();
     
-    
-    return false;
-    
+    return false;    
 }
 
+// Checks where to add the member
+GetTargetedIndex = (team) =>
+{
+    if(document.getElementById("add-to-index").value)
+        return Math.min(document.getElementById("add-to-index").value,team.members.length-1);
+
+    if(document.getElementById("add-to-bottom").checked)
+        return team.members.length;
+
+    return 0;
+}
+
+// select target Member 
 let UpdateBoxEmail = (button) =>
 {
     boxEmail = button.attributes["data-key"].nodeValue;
 }
+// deletes the target member
 let deleteMember = () =>
 {
     pseu.RemoveMember(boxEmail);
     UpdateUI();
     HideRecord();
 }
-
+// modifies the targeted member
 let ModifyMember = () =>
 {
     let name = document.getElementById("record-name").value;
@@ -230,10 +242,55 @@ let ModifyMember = () =>
     let role = document.getElementById("record-role").value;
     let biography = document.getElementById("record-biography").value;
     pseu.EditMember(boxEmail,name,email,major,role,biography); 
+
+    // Updates the UI
     HideRecord();
     UpdateUI();
 }
 
+
+
+// Updates all UI 
+let UpdateUI = () =>
+{
+    // checks filter and sort queries
+    let sortQuery = document.getElementById("letter-sort").value;
+    let majorQuery = document.getElementById("major-query").value;
+    let roleQuery = document.getElementById("role-query").value;
+    let nameQuery = document.getElementById("name-query").value;
+
+    // filter and sort the team list
+    let queryResult = pseu.FilterMembers(majorQuery,roleQuery,nameQuery);
+    queryResult = sorting(sortQuery,queryResult);
+    
+    // Updates the UI
+    document.getElementById("members-list").innerHTML =  pseu.render(queryResult);
+    document.getElementById("items-count").innerHTML = queryResult.length + " items";
+    document.getElementById("add-to-index").setAttribute("max",pseu.members.length-1);
+}
+
+// Clears The form
+ClearForm = () =>
+{
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("major").value = "";
+    document.getElementById("role").value = "";
+    document.getElementById("biography").value = "";
+}
+
+// functions that are related to Pop-up 
+// Updates pop-up info
+let UpdateRecord = (member) => 
+{
+    document.getElementById("record-name").value = member.name;
+    document.getElementById("record-email").value = member.email;
+    document.getElementById("record-major").value = member.major;
+    document.getElementById("record-role").value = member.role;
+    document.getElementById("record-biography").value = member.biography;
+}
+
+// Shows and hides Pop-up
 let ShowRecord = (button) =>
 {
     let _targetedEmail = button.attributes["data-key"].nodeValue;
@@ -248,45 +305,28 @@ let HideRecord = () =>
     boxEmail = "";
 }
 
-let UpdateRecord = (member) => 
-{
-    document.getElementById("record-name").value = member.name;
-    document.getElementById("record-email").value = member.email;
-    document.getElementById("record-major").value = member.major;
-    document.getElementById("record-role").value = member.role;
-    document.getElementById("record-biography").value = member.biography;
-}
 
+// UI related Functions To improve UX
+
+// when checking at bottom checkbox it will nullify the index input
 let CheckAtBottom = () =>
 {
     document.getElementById("add-to-index").value = "";
 }
 
+// when entering an index in index input it will uncheck add-at-bottom checkbox
 let atIndex = () =>
 {
     document.getElementById("add-to-bottom").checked = false;
     document.getElementById("add-to-index").value = Math.min(document.getElementById("add-to-index").value,team.members.length-1);
 }
 
-let UpdateUI = () =>
-{
-    let sortQuery = document.getElementById("letter-sort").value;
-    let majorQuery = document.getElementById("major-query").value;
-    let roleQuery = document.getElementById("role-query").value;
-    let nameQuery = document.getElementById("name-query").value;
-
-    let queryResult = pseu.FilterMembers(majorQuery,roleQuery,nameQuery);
-    queryResult = sorting(sortQuery,queryResult);
-    
-    document.getElementById("members-list").innerHTML =  pseu.render(queryResult);
-    document.getElementById("items-count").innerHTML = queryResult.length + " items";
-    document.getElementById("add-to-index").setAttribute("max",pseu.members.length-1);
-}
-
+// Main Function which is Called When Page is fully loaded
 let Main  = () => 
 {
     pseu = new Team("pseu");  
     UpdateUI();
+    // assign functionality to buttons
     document.getElementById("add").onclick = AddMember;
     document.getElementById("deleteMember").onclick = deleteMember;
     document.getElementById("modifyMember").onclick = ModifyMember;
