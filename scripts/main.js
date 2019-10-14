@@ -206,7 +206,7 @@ AddMember = () =>
     // Updates the UI
     HideError();
     UpdateUI();
-    //ClearForm();
+    ClearForm();
     
     return false;    
 }
