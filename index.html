@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>  
+    <header>
+        <div>
+            <h1 >PSEU Team Members</h1>
+        </div>
+    </header>
+    <section class="content">
+        <div class= "form-group">
+            <h3>Add new member</h3>
+            <div class = "form-body">         
+                <div class="information-box">
+                    <div class="information">
+                        <input type="text" name="name" id="name" placeholder="Name">
+                        <input type="email" name="email" id="email" placeholder="Email">
+                        <select name="major" id="major" >
+                            <option value="" selected disabled>major</option>
+                            <option>Computer Science</option>
+                            <option>Computer Engineering</option>
+                            <option>Information Technology</option>
+                            <option>Information System</option>      
+                        </select>
+                        <select name="role" id="role">
+                                <option>Front-End Developer</option>
+                                <option>Back-End Developer</option>
+                                <option>Full-Stack Developer</option>
+                                <option>UI/UX Designer</option>     
+                        </select>
+                        <textarea minlength="500" placeholder="Biography" id = "biography"></textarea>   
+                    </div>
+                    
+                    <div class="index-selection">
+                        <input type="checkbox" name="bottom" id="add-to-bottom">
+                        <label>Add to bottom</label>
+                        <span>&sol;</span>
+                        <label>or at index</label>
+                        <input type="number" name="index" min="0" id="add-to-index">
+                    </div>
+                </div>
+                
+                <button id = "add">SAVE</button>
+                 
+            </div>
+        </div>
+        <div class="members">
+            <div class="members-header">
+                <div class="filter-bar">
+                    <div action="">
+                        <span>SORT BY</span>
+                        <select name="letter-sort" id="letter-sort">
+                            <option>A-Z</option>
+                            <option>Z-A</option>    
+                            <option>Newest</option>    
+                            <option>Oldest</option>    
+                        </select>
+                        <vr></vr>
+                        <select name="major" id="major-query">
+                            <option value="" selected>major</option>
+                            <option>Computer Science</option>
+                            <option>Computer Engineering</option>
+                            <option>Information Technology</option>
+                            <option>Information System</option>      
+                        </select>
+                        <select name="role" id="role-query">
+                            <option value="" selected>role</option>
+                            <option>Front-End Developer</option>
+                            <option>Back-End Developer</option>
+                            <option>Full-Stack Developer</option>
+                            <option>UI/UX Designer</option>     
+                        </select>
+                        <vr></vr>
+                        <input id="name-query" type="text" placeholder="Search by name..." >   
+                    </div>
+                </div>
+                <div class="items-count">
+                   <p id = "items-count"> 10 items</p>
+                </div>
+            </div>
+            <div class="members-list" id = "members-list">
+           
+            </div>
+        </div>
+    </section>
+</body>
+</html>
