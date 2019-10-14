@@ -13,7 +13,7 @@ class Member
     constructor(name,email,major,role,biography,date)
     {
         this.name = name;
-        this.email = email;
+        this.email = email.toLowerCase();
         this.major = major;
         this.role = role;
         this.biography = biography;
@@ -57,7 +57,7 @@ class Team
     // Team Modification Functions
     GetMember(email)
     {
-        return this.members.find(element => element.email == email);
+        return this.members.find(element => element.email.toLowerCase() == email);
     }
 
     AddMember(index,member)
@@ -78,10 +78,10 @@ class Team
         let _targetedIndex = this.members.findIndex(element => element.email == targetedEmail);
 
         // validate the new email after modification
-        if(targetedEmail != email && this.members.findIndex(element => element.email == email) != -1)
+        if(targetedEmail.toLowerCase() != email.toLowerCase() && this.members.findIndex(element => element.email.toLowerCase() == email.toLowerCase()) != -1)
         {
             window.alert("there is already a user with the same email");
-            return;
+            return false;
         }
 
         this.members[_targetedIndex].name = name;
@@ -91,6 +91,7 @@ class Team
         this.members[_targetedIndex].biography = biography;
 
         this.SaveMembers();
+        return true;
     }
 
     // Save and Load Team Information
@@ -116,7 +117,7 @@ class Team
     // Email Validation
     HasEmail(email)
     {
-        return this.members.some((element) => {return element.email == email});
+        return this.members.some((element) => {return element.email.toLowerCase() == email.toLowerCase()});
     }
 
     // Filters 
@@ -185,13 +186,13 @@ AddMember = () =>
     // Input validation
     if(!name || !email || !major || !role || !biography)
     {
-        window.alert("Please fill all informations");
+        ShowError("All fields are Required!");
         return false;
     }
 
     if(pseu.HasEmail(email))
     {
-        window.alert("email exists");
+        ShowError("Email already Exists");
         return false;
     }
 
@@ -203,8 +204,9 @@ AddMember = () =>
     pseu.AddMember(indx,member)
     
     // Updates the UI
+    HideError();
     UpdateUI();
-    ClearForm();
+    //ClearForm();
     
     return false;    
 }
@@ -241,10 +243,10 @@ let ModifyMember = () =>
     let major = document.getElementById("record-major").value;
     let role = document.getElementById("record-role").value;
     let biography = document.getElementById("record-biography").value;
-    pseu.EditMember(boxEmail,name,email,major,role,biography); 
+    let edited = pseu.EditMember(boxEmail,name,email,major,role,biography); 
 
     // Updates the UI
-    HideRecord();
+    if(edited) HideRecord();
     UpdateUI();
 }
 
@@ -277,6 +279,8 @@ ClearForm = () =>
     document.getElementById("major").value = "";
     document.getElementById("role").value = "";
     document.getElementById("biography").value = "";
+    document.getElementById("add-to-index").value = "";
+    document.getElementById("add-to-bottom").checked = false;
 }
 
 // functions that are related to Pop-up 
@@ -321,13 +325,23 @@ let atIndex = () =>
     document.getElementById("add-to-index").value = Math.min(document.getElementById("add-to-index").value,team.members.length-1);
 }
 
+// Showing Errors in filling the form 
+let ShowError = (message) =>
+{
+    document.getElementById("form-error").innerHTML = message;
+}
+
+let HideError = () =>
+{
+    ShowError("");
+}
+
 // Main Function which is Called When Page is fully loaded
 let Main  = () => 
 {
     pseu = new Team("pseu");  
     UpdateUI();
     // assign functionality to buttons
-    document.getElementById("add").onclick = AddMember;
     document.getElementById("deleteMember").onclick = deleteMember;
     document.getElementById("modifyMember").onclick = ModifyMember;
     document.getElementById("cancel").onclick = HideRecord;

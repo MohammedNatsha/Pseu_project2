@@ -387,6 +387,11 @@ textarea {
   resize: none;
 }
 
+.error-message {
+  margin: 15px;
+  color: #d11313;
+}
+
 vr {
   border-left: 1px solid white;
   height: 20px;

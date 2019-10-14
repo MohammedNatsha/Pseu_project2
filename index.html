@@ -17,7 +17,7 @@
     <section class="content">
         <div class= "form-group">
             <h3>Add new member</h3>
-            <div class = "form-body">
+            <form class = "form-body" onsubmit="AddMember();return false">
                 <div class="information-box">
                     <div class="information">
                         <input type="text" name="name" id="name" placeholder="Name" >
@@ -37,6 +37,7 @@
                                 <option>UI/UX Designer</option>     
                         </select>
                         <textarea minlength="500" maxlength="1500" placeholder="Biography" id = "biography" ></textarea>   
+                        <h5 id = "form-error" class="error-message"></h5>
                     </div>
                     <div class="index-selection">
                         <input type="checkbox" name="bottom" id="add-to-bottom">
@@ -49,7 +50,7 @@
                 
                 <button id = "add">SAVE</button>
                  
-            </div>
+            </form>
         </div>
         
         <div class="members">
