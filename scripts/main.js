@@ -238,11 +238,26 @@ let deleteMember = () =>
 // modifies the targeted member
 let ModifyMember = () =>
 {
+    
+    if(!document.getElementById("record-email").checkValidity())
+    {
+        window.alert("Invalid Email");
+        return false;
+    }
+    
+    if(!document.getElementById("record-biography").checkValidity())
+    {
+        window.alert("Biography Size should be from 500char to 1500char");
+        return false;
+    }
+    
     let name = document.getElementById("record-name").value;
     let email = document.getElementById("record-email").value;
     let major = document.getElementById("record-major").value;
     let role = document.getElementById("record-role").value;
     let biography = document.getElementById("record-biography").value;
+
+
     let edited = pseu.EditMember(boxEmail,name,email,major,role,biography); 
 
     // Updates the UI
